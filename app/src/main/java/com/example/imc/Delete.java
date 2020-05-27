@@ -21,7 +21,9 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 public class Delete extends AppCompatActivity {
     private EditText editDate;
     private Button btSubmit;
-    private CollectionReference db = FirebaseFirestore.getInstance().collection("user");
+    private static CollectionReference db = FirebaseFirestore.getInstance().collection("user");
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,9 +39,10 @@ public class Delete extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String date = editDate.getText().toString();
-                if(isNullOrEmpty(date)){
+                if (isNullOrEmpty(date)) {
                     Toast.makeText(Delete.this, "No Data", Toast.LENGTH_LONG).show();
                     openActivity();
+                    return;
                 }
                 db.document(date)
                         .delete()

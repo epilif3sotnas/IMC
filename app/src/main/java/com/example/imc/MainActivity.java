@@ -23,17 +23,15 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btSubmit, btViewAll, btDelete, btGuest;
-    private EditText editAge, editWeight, editHeight, input;
+    private Button btSubmit, btViewAll, btDelete;
+    private EditText editAge, editWeight, editHeight;
     private CollectionReference db = FirebaseFirestore.getInstance().collection("user");
-    private String datePass = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
         btSubmit = (Button) findViewById(R.id.btSubmit);
         btViewAll = (Button) findViewById(R.id.btViewAll);
         btDelete = (Button) findViewById(R.id.btDelete);
-        btGuest = (Button) findViewById(R.id.btGuest);
 
         Submit();
         ViewAll();
@@ -58,26 +55,24 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 String currentDate = format.format(Calendar.getInstance().getTime());
+
                 if(editAge.length() == 0 || editHeight.length() == 0 || editWeight.length() == 0){
                     Toast.makeText(MainActivity.this, "Parameters empty", Toast.LENGTH_LONG).show();
                     return;
                 }
-
-                int age = Integer.parseInt(editAge.getText().toString());
                 double weight = Double.parseDouble(editWeight.getText().toString());
-                int height_cm = Integer.parseInt(editHeight.getText().toString());
-                double height_m = height_cm * 0.01;
-                DecimalFormat df2 = new DecimalFormat("#.##");
-                String imc = df2.format(weight / (height_m * height_m));
-                String name = "User";
+                double height_m = 0.01 * Integer.parseInt(editHeight.getText().toString());
+                int age = Integer.parseInt(editAge.getText().toString());
 
                 if(age == 0 || height_m == 0 || weight == 0){
                     Toast.makeText(MainActivity.this, "Parameters with 0", Toast.LENGTH_LONG).show();
                     return;
                 }
 
+                String imc = IMC.calcIMC(weight, height_m);
+
                 Map<String, Object> user = new HashMap<>();
-                user.put("Name", name);
+                user.put("Name", "User");
                 user.put("Age", age);
                 user.put("Weight", weight);
                 user.put("Height", height_m);
@@ -102,152 +97,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void message(int age, double height, String imc){
-        Double imc_d = Double.parseDouble(imc);
-        Double weightIdeal_min;
-        Double weightIdeal_max;
-        StringBuffer buffer = new StringBuffer();
-        if(age < 15)
-            return;
-        if(age <= 24){
-            if(imc_d < 19){
-                buffer.append("Your IMC is " + imc_d + ", you are in low weight.\n");
-            }
-            else if(imc_d >= 19 && imc_d < 24){
-                buffer.append("Your IMC is " + imc_d + ", you are in normal weight.\n");
-            }
-            else if(imc_d >= 24 && imc_d < 29){
-                buffer.append("Your IMC is " + imc_d + ", you are in above weight.\n");
-            }
-            else if(imc_d >= 29 && imc_d < 39){
-                buffer.append("Your IMC is " + imc_d + ", you are in obesity.\n");
-            }
-            else if(imc_d >= 39){
-                buffer.append("Your IMC is " + imc_d + ", you are in serious obesity.\n");
-            }
-            else{
-                return;
-            }
-            weightIdeal_min = height * height * 19;
-            weightIdeal_max = height * height * 24;
-
-            buffer.append("Your normal weight is between " + weightIdeal_min + " and " + weightIdeal_max + ".\n");
-
-        }
-        if(age >= 25 && age <= 34){
-            if(imc_d < 20){
-                buffer.append("Your IMC is " + imc_d + ", you are in low weight.\n");            }
-            else if(imc_d >= 20 && imc_d < 25){
-                buffer.append("Your IMC is " + imc_d + ", you are in normal weight.\n");
-            }
-            else if(imc_d >= 25 && imc_d < 30){
-                buffer.append("Your IMC is " + imc_d + ", you are in above weight.\n");
-            }
-            else if(imc_d >= 30 && imc_d < 40){
-                buffer.append("Your IMC is " + imc_d + ", you are in obesity.\n");
-            }
-            else if(imc_d >= 40){
-                buffer.append("Your IMC is " + imc_d + ", you are in serious obesity.\n");
-            }
-            else{
-                return;
-            }
-            weightIdeal_min = height * height * 20;
-            weightIdeal_max = height * height * 25;
-
-            buffer.append("Your normal weight is between " + weightIdeal_min + " and " + weightIdeal_max + ".\n");
-        }
-        if(age >= 35 && age <= 44) {
-            if (imc_d < 21) {
-                buffer.append("Your IMC is " + imc_d + ", you are in low weight.\n");
-            } else if (imc_d >= 21 && imc_d < 26) {
-                buffer.append("Your IMC is " + imc_d + ", you are in normal weight.\n");
-            } else if (imc_d >= 26 && imc_d < 31) {
-                buffer.append("Your IMC is " + imc_d + ", you are in above weight.\n");
-            } else if (imc_d >= 31 && imc_d < 41) {
-                buffer.append("Your IMC is " + imc_d + ", you are in obesity.\n");
-            } else if (imc_d >= 41) {
-                buffer.append("Your IMC is " + imc_d + ", you are in serious obesity.\n");
-            } else {
-                return;
-            }
-            weightIdeal_min = height * height * 21;
-            weightIdeal_max = height * height * 26;
-
-            System.out.println("Your normal weight is between " + weightIdeal_min + " and " + weightIdeal_max + ".\n");
-        }
-        if(age >= 45 && age <= 54){
-            if(imc_d < 22){
-                buffer.append("Your IMC is " + imc_d + ", you are in low weight.\n");
-            }
-            else if(imc_d >= 22 && imc_d < 27){
-                buffer.append("Your IMC is " + imc_d + ", you are in normal weight.\n");
-            }
-            else if(imc_d >= 27 && imc_d < 32){
-                buffer.append("Your IMC is " + imc_d + ", you are in above weight.\n");
-            }
-            else if(imc_d >= 32 && imc_d < 42){
-                buffer.append("Your IMC is " + imc_d + ", you are in obesity.\n");
-            }
-            else if(imc_d >= 42){
-                buffer.append("Your IMC is " + imc_d + ", you are in serious obesity.\n");
-            }
-            else{
-                return;
-            }
-            weightIdeal_min = height * height * 22;
-            weightIdeal_max = height * height * 27;
-
-            buffer.append("Your normal weight is between " + weightIdeal_min + " and " + weightIdeal_max + ".\n");
-        }
-        if(age >= 55 && age <= 64){
-            if(imc_d < 23){
-                buffer.append("Your IMC is " + imc_d + ", you are in low weight.\n");
-            }
-            else if(imc_d >= 23 && imc_d < 28){
-                buffer.append("Your IMC is " + imc_d + ", you are in normal weight.\n");
-            }
-            else if(imc_d >= 28 && imc_d < 33){
-                buffer.append("Your IMC is " + imc_d + ", you are in above weight.\n");
-            }
-            else if(imc_d >= 33 && imc_d < 43){
-                buffer.append("Your IMC is " + imc_d + ", you are in obesity.\n");
-            }
-            else if(imc_d >= 43){
-                buffer.append("Your IMC is " + imc_d + ", you are in serious obesity.\n");
-            }
-            else{
-                return;
-            }
-            weightIdeal_min = height * height * 23;
-            weightIdeal_max = height * height * 28;
-
-            System.out.println("Your normal weight is between " + weightIdeal_min + " and " + weightIdeal_max + ".\n");
-        }
-        if(age >= 65){
-            if(imc_d < 24){
-                buffer.append("Your IMC is " + imc_d + ", you are in low weight.\n");
-            }
-            else if(imc_d >= 24 && imc_d < 29){
-                buffer.append("Your IMC is " + imc_d + ", you are in normal weight.\n");
-            }
-            else if(imc_d >= 29 && imc_d < 34){
-                buffer.append("Your IMC is " + imc_d + ", you are in above weight.\n");
-            }
-            else if(imc_d >= 34 && imc_d < 44){
-                buffer.append("Your IMC is " + imc_d + ", you are in obesity.\n");
-            }
-            else if(imc_d >= 44){
-                buffer.append("Your IMC is " + imc_d + ", you are in serious obesity.\n");
-            }
-            else{
-                return;
-            }
-            weightIdeal_min = height * height * 24;
-            weightIdeal_max = height * height * 29;
-
-            buffer.append("Your normal weight is between " + weightIdeal_min + " and " + weightIdeal_max + ".\n");
-        }
-        showMessage2("IMC", buffer.toString());
+        String buffer = IMC.refIMC(imc, age, height);
+        showMessage2("IMC", buffer);
     }
     public void ViewAll(){
         btViewAll.setOnClickListener(new View.OnClickListener() {
@@ -257,8 +108,8 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         StringBuffer buffer = new StringBuffer();
-                        if(task.isSuccessful()){
-                            for (QueryDocumentSnapshot document : task.getResult()){
+                        if (task.isSuccessful()) {
+                            for (QueryDocumentSnapshot document : task.getResult()) {
                                 buffer.append("Name: " + document.getString("Name") + "\n");
                                 buffer.append("Date: " + document.getString("Date") + "\n");
                                 buffer.append("Age: " + document.get("Age").toString() + "\n");
@@ -266,8 +117,8 @@ public class MainActivity extends AppCompatActivity {
                                 buffer.append("Weight: " + document.get("Weight").toString() + "\n");
                                 buffer.append("IMC: " + document.get("IMC").toString() + "\n\n");
                             }
-                        }else{
-                            Toast.makeText(MainActivity.this, "Nothing found", Toast.LENGTH_LONG).show();
+                        } else {
+                            Toast.makeText(new MainActivity(), "Nothing found", Toast.LENGTH_LONG).show();
                             Log.d("MainActivity", "Error getting documents: ", task.getException());
                         }
                         showMessage("Data", buffer.toString());
@@ -277,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void showMessage(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
         builder.setCancelable(true);
         builder.setTitle(title);
         builder.setMessage(message);

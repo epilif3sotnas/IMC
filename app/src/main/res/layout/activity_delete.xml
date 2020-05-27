@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#141d26"
+    android:background="#FFF"
     tools:context=".Delete">
 
     <TextView
@@ -15,8 +15,8 @@
         android:layout_marginLeft="76dp"
         android:layout_marginTop="189dp"
         android:text="Date (year-month-day):"
-        android:textColor="#FFF"
-        android:textColorHint="#000000"
+        android:textColor="#000"
+        android:textColorHint="#000"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -26,8 +26,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="64dp"
         android:text="Delete"
-        android:textColor="#FFF"
-        android:textColorHint="#000000"
+        android:textColor="#000"
+        android:textColorHint="#000"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -39,9 +39,9 @@
         android:layout_marginTop="58dp"
         android:layout_marginEnd="55dp"
         android:layout_marginRight="55dp"
-        android:text="Submit"
-        android:textColor="#000000"
-        android:textColorHint="#000000"
+        android:text="Delete"
+        android:textColor="#000"
+        android:textColorHint="#000"
         app:layout_constraintEnd_toEndOf="@+id/editDate"
         app:layout_constraintTop_toBottomOf="@+id/editDate" />
 
@@ -52,7 +52,7 @@
         android:layout_marginTop="33dp"
         android:ems="10"
         android:inputType="date"
-        android:textColor="#FFF"
+        android:textColor="#000"
         app:layout_constraintStart_toStartOf="@+id/textView5"
         app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
