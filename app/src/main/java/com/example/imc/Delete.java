@@ -1,9 +1,12 @@
 package com.example.imc;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,6 +19,8 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.Objects;
+
 import static com.google.common.base.Strings.isNullOrEmpty;
 
 public class Delete extends AppCompatActivity {
@@ -24,13 +29,18 @@ public class Delete extends AppCompatActivity {
     private CollectionReference db = FirebaseFirestore.getInstance().collection("user");
 
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete);
 
-        editDate = (EditText) findViewById(R.id.editDate);
-        btSubmit = (Button) findViewById(R.id.btSubmit);
+        Toolbar topbar = findViewById(R.id.topBar);
+        setSupportActionBar(topbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("IMC Calculator");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        editDate = findViewById(R.id.editDate);
+        btSubmit = findViewById(R.id.btSubmit);
 
         Submit();
     }

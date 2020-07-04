@@ -113,17 +113,18 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 db.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        StringBuffer buffer = new StringBuffer();
+                        StringBuilder buffer = new StringBuilder();
                         if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : task.getResult()) {
-                                buffer.append("Name: " + document.getString("Name") + "\n");
-                                buffer.append("Date: " + document.getString("Date") + "\n");
-                                buffer.append("Age: " + document.get("Age").toString() + "\n");
-                                buffer.append("Height: " + document.get("Height").toString() + "\n");
-                                buffer.append("Weight: " + document.get("Weight").toString() + "\n");
-                                buffer.append("IMC: " + document.get("IMC").toString() + "\n\n");
+                            for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                                buffer.append("Name: ").append(document.getString("Name")).append("\n");
+                                buffer.append("Date: ").append(document.getString("Date")).append("\n");
+                                buffer.append("Age: ").append(Objects.requireNonNull(document.get("Age")).toString()).append("\n");
+                                buffer.append("Height: ").append(Objects.requireNonNull(document.get("Height")).toString()).append("\n");
+                                buffer.append("Weight: ").append(Objects.requireNonNull(document.get("Weight")).toString()).append("\n");
+                                buffer.append("IMC: ").append(Objects.requireNonNull(document.get("IMC")).toString()).append("\n\n");
                             }
                         } else {
                             Toast.makeText(MainActivity.this, "Nothing found", Toast.LENGTH_LONG).show();

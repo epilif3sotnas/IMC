@@ -4,7 +4,7 @@
     <item
         android:id="@+id/about"
         android:title="@string/about"
-        android:background="@color/White"
+        android:background="@color/white"
         app:showAsAction="never">
     </item>
 </menu>
