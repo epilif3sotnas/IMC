@@ -8,4 +8,6 @@
     <string name="submit">Submit</string>
     <string name="weight">Weight (Kg)</string>
     <string name="date">Date (year-month-day):</string>
+    <string name="version">Version BETA 0.01</string>
+    <string name="developer">This app is developed by Filipe Santos</string>
 </resources>

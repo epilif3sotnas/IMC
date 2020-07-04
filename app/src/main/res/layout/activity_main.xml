@@ -9,7 +9,9 @@
 
     <include
         layout="@layout/main_top_bar"
-        android:id="@+id/topBar">
+        android:id="@+id/topBar"
+        android:background="@color/darkGray"
+        app:popupTheme="@style/TopBarPopup">
     </include>
 
     <Button
