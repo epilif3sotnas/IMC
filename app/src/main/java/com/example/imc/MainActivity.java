@@ -2,6 +2,7 @@ package com.example.imc;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,8 +11,10 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,23 +30,28 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     private Button btSubmit, btViewAll, btDelete;
     private EditText editAge, editWeight, editHeight;
     private CollectionReference db = FirebaseFirestore.getInstance().collection("user");
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        editAge = (EditText) findViewById(R.id.editAge);
-        editWeight = (EditText) findViewById(R.id.editWeight);
-        editHeight = (EditText) findViewById(R.id.editHeight);
-        btSubmit = (Button) findViewById(R.id.btSubmit);
-        btViewAll = (Button) findViewById(R.id.btViewAll);
-        btDelete = (Button) findViewById(R.id.btDelete);
+        Toolbar topbar = findViewById(R.id.topBar);
+        setSupportActionBar(topbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("IMC Calculator");
+        editAge = findViewById(R.id.editAge);
+        editWeight = findViewById(R.id.editWeight);
+        editHeight = findViewById(R.id.editHeight);
+        btSubmit = findViewById(R.id.btSubmit);
+        btViewAll = findViewById(R.id.btViewAll);
+        btDelete = findViewById(R.id.btDelete);
 
         Submit();
         ViewAll();
@@ -118,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
                                 buffer.append("IMC: " + document.get("IMC").toString() + "\n\n");
                             }
                         } else {
-                            Toast.makeText(new MainActivity(), "Nothing found", Toast.LENGTH_LONG).show();
+                            Toast.makeText(MainActivity.this, "Nothing found", Toast.LENGTH_LONG).show();
                             Log.d("MainActivity", "Error getting documents: ", task.getException());
                         }
                         showMessage("Data", buffer.toString());
@@ -128,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void showMessage(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setCancelable(true);
         builder.setTitle(title);
         builder.setMessage(message);

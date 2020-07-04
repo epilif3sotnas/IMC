@@ -21,7 +21,7 @@ import static com.google.common.base.Strings.isNullOrEmpty;
 public class Delete extends AppCompatActivity {
     private EditText editDate;
     private Button btSubmit;
-    private static CollectionReference db = FirebaseFirestore.getInstance().collection("user");
+    private CollectionReference db = FirebaseFirestore.getInstance().collection("user");
 
 
     @Override
