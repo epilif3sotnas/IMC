@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
 
         Submit();
         ViewAll();
-        Delete();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -121,41 +120,26 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Data not inserted", Toast.LENGTH_LONG).show();
                     }
                 });
+                editWeight.getText().clear();
                 message(age, height_m, imc);
             }
         });
     }
     public void message(int age, double height, String imc){
         String buffer = IMC.refIMC(imc, age, height);
-        showMessage2("IMC", buffer);
+        showMessage("IMC", buffer);
     }
     public void ViewAll(){
         btViewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                db.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        StringBuilder buffer = new StringBuilder();
-                        if (task.isSuccessful()) {
-                            for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
-                                buffer.append("Name: ").append(document.getString("Name")).append("\n");
-                                buffer.append("Date: ").append(document.getString("Date")).append("\n");
-                                buffer.append("Age: ").append(Objects.requireNonNull(document.get("Age")).toString()).append("\n");
-                                buffer.append("Height: ").append(Objects.requireNonNull(document.get("Height")).toString()).append("\n");
-                                buffer.append("Weight: ").append(Objects.requireNonNull(document.get("Weight")).toString()).append("\n");
-                                buffer.append("IMC: ").append(Objects.requireNonNull(document.get("IMC")).toString()).append("\n\n");
-                            }
-                        } else {
-                            Toast.makeText(MainActivity.this, "Nothing found", Toast.LENGTH_LONG).show();
-                            Log.d("MainActivity", "Error getting documents: ", task.getException());
-                        }
-                        showMessage("Data", buffer.toString());
-                    }
-                });
+                startActivityViewData();
             }
         });
+    }
+    public void startActivityViewData() {
+        Intent viewData = new Intent(this, ViewData.class);
+        startActivity(viewData);
     }
     public void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -169,30 +153,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         builder.show();
-    }
-    public void showMessage2(String title, String message){
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setCancelable(true);
-        builder.setTitle(title);
-        builder.setMessage(message);
-        builder.setNegativeButton("OK", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
-        builder.show();
-    }
-    public void Delete(){
-        btDelete.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openDelete();
-            }
-        });
-    }
-    public void openDelete(){
-        Intent intent = new Intent(this, Delete.class);
-        startActivity(intent);
     }
 }

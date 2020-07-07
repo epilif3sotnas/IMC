@@ -20,5 +20,6 @@ public class About extends AppCompatActivity {
         Toolbar topbar = findViewById(R.id.topBar);
         setSupportActionBar(topbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("IMC Calculator");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 }
