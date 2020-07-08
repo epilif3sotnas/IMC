@@ -21,7 +21,6 @@ import java.util.Objects;
 
 public class ViewData extends AppCompatActivity {
     private ListView listView;
-    private ArrayList<String> date, age, height, weight, imc;
     private  static CollectionReference db = FirebaseFirestore.getInstance().collection("user");
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)

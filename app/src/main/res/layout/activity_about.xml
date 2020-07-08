@@ -14,8 +14,8 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="360dp"
-        android:layout_height="16dp"
+        android:layout_width="334dp"
+        android:layout_height="21dp"
         android:layout_marginStart="9dp"
         android:layout_marginLeft="9dp"
         android:layout_marginTop="55dp"
@@ -26,14 +26,14 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/textView6"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.787"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.822" />
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="328dp"
+        android:layout_width="307dp"
         android:layout_height="19dp"
         android:layout_marginStart="4dp"
         android:layout_marginLeft="4dp"

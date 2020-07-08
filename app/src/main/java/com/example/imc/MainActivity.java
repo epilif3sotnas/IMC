@@ -19,14 +19,10 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -36,7 +32,7 @@ import java.util.Map;
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
-    private Button btSubmit, btViewAll, btDelete;
+    private Button btSubmit, btViewAll;
     private EditText editAge, editWeight, editHeight;
     private CollectionReference db = FirebaseFirestore.getInstance().collection("user");
 
@@ -54,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
         editHeight = findViewById(R.id.editHeight);
         btSubmit = findViewById(R.id.btSubmit);
         btViewAll = findViewById(R.id.btViewAll);
-        btDelete = findViewById(R.id.btDelete);
 
         Submit();
         ViewAll();
