@@ -51,7 +51,6 @@ public class ViewData extends AppCompatActivity {
                     }
                 }
                 if ((!data.isEmpty())){
-                    System.out.println(data);
                     CustomAdapterData customAdapter = new CustomAdapterData(data, getApplicationContext());
                     listView.setAdapter(customAdapter);
                 }

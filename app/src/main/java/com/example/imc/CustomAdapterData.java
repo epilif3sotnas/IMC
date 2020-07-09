@@ -93,11 +93,15 @@ public class CustomAdapterData extends BaseAdapter implements ListAdapter {
                                 Toast.makeText(context, "Data not deleted", Toast.LENGTH_LONG).show();
                             }
                         });
-                data.date.setText(list.get(position).getDate());
-                data.age.setText(list.get(position).getAge());
-                data.height.setText(list.get(position).getHeight());
-                data.weight.setText(list.get(position).getWeight());
-                data.imc.setText(list.get(position).getImc());
+                int pos = position;
+                if (position == list.size()){
+                    pos = position - 1;
+                }
+                data.date.setText(list.get(pos).getDate());
+                data.age.setText(list.get(pos).getAge());
+                data.height.setText(list.get(pos).getHeight());
+                data.weight.setText(list.get(pos).getWeight());
+                data.imc.setText(list.get(pos).getImc());
                 Toast.makeText(context, "Atividade eliminada", Toast.LENGTH_LONG).show();
             }
         });

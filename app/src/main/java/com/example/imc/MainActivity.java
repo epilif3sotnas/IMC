@@ -51,8 +51,7 @@ public class MainActivity extends AppCompatActivity {
         btSubmit = findViewById(R.id.btSubmit);
         btViewAll = findViewById(R.id.btViewAll);
 
-        Submit();
-        ViewAll();
+        buttons();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -72,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    public void Submit(){
+    public void buttons(){
         btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,18 +118,16 @@ public class MainActivity extends AppCompatActivity {
                 message(age, height_m, imc);
             }
         });
-    }
-    public void message(int age, double height, String imc){
-        String buffer = IMC.refIMC(imc, age, height);
-        showMessage("IMC", buffer);
-    }
-    public void ViewAll(){
         btViewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivityViewData();
             }
         });
+    }
+    public void message(int age, double height, String imc){
+        String buffer = IMC.refIMC(imc, age, height);
+        showMessage("IMC", buffer);
     }
     public void startActivityViewData() {
         Intent viewData = new Intent(this, ViewData.class);
