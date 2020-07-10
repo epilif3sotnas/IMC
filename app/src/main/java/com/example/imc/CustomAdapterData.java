@@ -52,7 +52,7 @@ public class CustomAdapterData extends BaseAdapter implements ListAdapter {
     @SuppressLint("InflateParams")
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        Data data = new Data();
+        final Data data = new Data();
         if(convertView == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             assert inflater != null;
@@ -76,7 +76,6 @@ public class CustomAdapterData extends BaseAdapter implements ListAdapter {
         btDel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Data data = new Data();
                 db.document(list.get(position).getDate())
                         .delete()
                         .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -93,6 +92,7 @@ public class CustomAdapterData extends BaseAdapter implements ListAdapter {
                                 Toast.makeText(context, "Data not deleted", Toast.LENGTH_LONG).show();
                             }
                         });
+                list.remove(list.get(position));
                 int pos = position;
                 if (position == list.size()){
                     pos = position - 1;
@@ -102,7 +102,7 @@ public class CustomAdapterData extends BaseAdapter implements ListAdapter {
                 data.height.setText(list.get(pos).getHeight());
                 data.weight.setText(list.get(pos).getWeight());
                 data.imc.setText(list.get(pos).getImc());
-                Toast.makeText(context, "Atividade eliminada", Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Data deleted", Toast.LENGTH_LONG).show();
             }
         });
         return convertView;
