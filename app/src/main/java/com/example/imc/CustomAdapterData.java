@@ -56,7 +56,8 @@ public class CustomAdapterData extends BaseAdapter implements ListAdapter {
         if(convertView == null){
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             assert inflater != null;
-            convertView = inflater.inflate(R.layout.list_data, null);
+            convertView = inflater.inflate(R.layout.list_data, parent, false);
+            convertView.setTag(data);
         }
 
         data.date = convertView.findViewById(R.id.date);
