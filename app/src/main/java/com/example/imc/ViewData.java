@@ -14,6 +14,8 @@ import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -23,11 +25,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Objects;
 
+@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 public class ViewData extends AppCompatActivity {
     private ListView listView;
     private ProgressBar loading;
     private TextView date, age, weight, height, imc;
-    private  static CollectionReference db = FirebaseFirestore.getInstance().collection("user");
+    FirebaseUser userCurrent = FirebaseAuth.getInstance().getCurrentUser();
+    private  CollectionReference db = FirebaseFirestore.getInstance().collection(Objects.requireNonNull(userCurrent).getUid());
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override

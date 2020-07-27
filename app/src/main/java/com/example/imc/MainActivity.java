@@ -19,8 +19,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.imc.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -31,10 +34,13 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+@RequiresApi(api = Build.VERSION_CODES.KITKAT)
 public class MainActivity extends AppCompatActivity {
     private Button btSubmit, btViewAll;
     private EditText editAge, editWeight, editHeight;
-    private CollectionReference db = FirebaseFirestore.getInstance().collection("user");
+    FirebaseUser userCurrent = FirebaseAuth.getInstance().getCurrentUser();
+    private CollectionReference db = FirebaseFirestore.getInstance().collection(Objects.requireNonNull(userCurrent).getUid());
+
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -63,9 +69,11 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.about:
-                Intent add = new Intent(this, About.class);
-                startActivity(add);
+                startActivity(new Intent(this, About.class));
                 break;
+            case R.id.logout:
+                FirebaseAuth.getInstance().signOut();
+                startActivity(new Intent(this, LoginActivity.class));
             default:
                 break;
         }
@@ -92,9 +100,11 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 String imc = IMC.calcIMC(weight, height_m);
-
+                if (userCurrent == null){
+                    return;
+                }
                 Map<String, Object> user = new HashMap<>();
-                user.put("Name", "User");
+                user.put("Name", userCurrent.getEmail());
                 user.put("Age", age);
                 user.put("Weight", weight);
                 user.put("Height", height_m);

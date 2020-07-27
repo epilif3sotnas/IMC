@@ -7,4 +7,10 @@
         android:background="@color/white"
         app:showAsAction="never">
     </item>
+    <item
+        android:id="@+id/logout"
+        android:title="@string/logout"
+        android:background="@color/white"
+        app:showAsAction="never">
+    </item>
 </menu>
