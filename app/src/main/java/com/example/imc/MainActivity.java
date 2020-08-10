@@ -1,7 +1,9 @@
 package com.example.imc;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
@@ -20,15 +22,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.imc.ui.login.LoginActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
@@ -57,6 +64,10 @@ public class MainActivity extends AppCompatActivity {
         btSubmit = findViewById(R.id.btSubmit);
         btViewAll = findViewById(R.id.btViewAll);
 
+        boolean network = isConnectedNetwork();
+        if (!network){
+            Toast.makeText(MainActivity.this, "No internet connection", Toast.LENGTH_LONG).show();
+        }
         buttons();
     }
     @Override
@@ -131,17 +142,13 @@ public class MainActivity extends AppCompatActivity {
         btViewAll.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityViewData();
+                startActivity(new Intent(getApplicationContext(), ViewData.class));
             }
         });
     }
     public void message(int age, double height, String imc){
         String buffer = IMC.refIMC(imc, age, height);
         showMessage("IMC", buffer);
-    }
-    public void startActivityViewData() {
-        Intent viewData = new Intent(this, ViewData.class);
-        startActivity(viewData);
     }
     public void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -155,5 +162,10 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+    public boolean isConnectedNetwork(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert connectivityManager != null;
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 }

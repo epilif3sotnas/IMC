@@ -8,9 +8,9 @@
         android:id="@+id/date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="30dp"
         android:layout_centerVertical="true"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="30dp"
         android:textColor="@color/black"/>
 
     <TextView
@@ -26,35 +26,35 @@
         android:id="@+id/height"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="145dp"
+        android:layout_marginLeft="150dp"
         android:layout_centerVertical="true"
-        android:layout_marginStart="145dp"
+        android:layout_marginStart="150dp"
         android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/weight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="190dp"
+        android:layout_marginLeft="195dp"
         android:layout_centerVertical="true"
-        android:layout_marginStart="190dp"
+        android:layout_marginStart="195dp"
         android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/imc"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="245dp"
+        android:layout_marginLeft="240dp"
         android:layout_centerVertical="true"
-        android:layout_marginStart="245dp"
+        android:layout_marginStart="240dp"
         android:textColor="@color/black"/>
 
     <Button
         android:id="@+id/btDelete"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="25dp"
-        android:layout_marginEnd="25dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginEnd="30dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:text="@string/delete"

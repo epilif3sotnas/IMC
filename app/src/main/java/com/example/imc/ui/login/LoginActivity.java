@@ -131,7 +131,7 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.addAuthStateListener(mAuthListener);
     }
     private void updateUiWithUser() {
-        Toast.makeText(getApplicationContext(), getString(R.string.welcome) + usernameEditText.getText().toString(), Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), getString(R.string.welcome), Toast.LENGTH_LONG).show();
     }
     private void showLoginFailed(@StringRes Integer errorString) {
         Toast.makeText(getApplicationContext(), errorString, Toast.LENGTH_SHORT).show();
