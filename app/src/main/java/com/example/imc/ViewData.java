@@ -5,12 +5,15 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -60,6 +63,10 @@ public class ViewData extends AppCompatActivity {
         listView = findViewById(R.id.data);
         listView.setVisibility(View.GONE);
 
+        boolean network = isConnectedNetwork();
+        if (!network){
+            Toast.makeText(ViewData.this, "No internet connection", Toast.LENGTH_LONG).show();
+        }
         loadData();
     }
     public void loadData(){
@@ -88,5 +95,10 @@ public class ViewData extends AppCompatActivity {
                 }
             }
         });
+    }
+    public boolean isConnectedNetwork(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert connectivityManager != null;
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 }
