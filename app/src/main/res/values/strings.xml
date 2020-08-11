@@ -26,4 +26,5 @@
     <string name="register">Register</string>
     <string name="logout">Logout</string>
     <string name="signUp">Sign Up</string>
+    <string name="tableIMC">Table IMC</string>
 </resources>
