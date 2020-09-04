@@ -1,4 +1,4 @@
-package com.example.imc;
+package com.example.imc.classes;
 
 public class objData {
     private String date;

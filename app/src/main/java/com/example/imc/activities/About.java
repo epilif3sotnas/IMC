@@ -1,4 +1,4 @@
-package com.example.imc;
+package com.example.imc.activities;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -7,18 +7,20 @@ import androidx.appcompat.widget.Toolbar;
 import android.os.Build;
 import android.os.Bundle;
 
+import com.example.imc.R;
+
 import java.util.Objects;
 
-public class tableIMC extends AppCompatActivity {
+public class About extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_table_i_m_c);
+        setContentView(R.layout.activity_about);
 
-        Toolbar topBar = findViewById(R.id.topBar);
-        setSupportActionBar(topBar);
+        Toolbar topbar = findViewById(R.id.topBar);
+        setSupportActionBar(topbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("IMC Calculator");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

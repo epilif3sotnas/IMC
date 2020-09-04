@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    tools:context=".ViewData">
+    tools:context=".activities.ViewData">
 
     <include
         android:id="@+id/topBar"
@@ -14,17 +14,61 @@
 
     <ListView
         android:id="@+id/data"
-        android:layout_width="409dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="13dp"
-        android:layout_marginBottom="7dp"
+        android:layout_width="406dp"
+        android:layout_height="556dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/weight"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/weight"
-        app:layout_constraintTop_toBottomOf="@+id/date"
-        app:layout_constraintVertical_bias="0.0">
-    </ListView>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBar"
+        app:layout_constraintVertical_bias="1.0"></ListView>
+
+    <TextView
+        android:id="@+id/imc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/imc"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/data"
+        app:layout_constraintStart_toEndOf="@+id/weight" />
+
+    <TextView
+        android:id="@+id/weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/weight1"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/data"
+        app:layout_constraintStart_toEndOf="@+id/height" />
+
+    <TextView
+        android:id="@+id/height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/height1"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/data"
+        app:layout_constraintStart_toEndOf="@+id/age" />
+
+    <TextView
+        android:id="@+id/age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginLeft="88dp"
+        android:text="@string/age"
+        android:textColor="@color/black"
+        app:layout_constraintBaseline_toBaselineOf="@+id/height"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/date"
@@ -32,61 +76,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="46dp"
         android:layout_marginLeft="46dp"
-        android:layout_marginTop="69dp"
         android:layout_marginEnd="55dp"
         android:layout_marginRight="55dp"
+        android:layout_marginBottom="16dp"
         android:text="@string/date1"
         android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/data"
         app:layout_constraintEnd_toEndOf="@+id/age"
-        app:layout_constraintStart_toStartOf="@+id/data"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/age"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="107dp"
-        android:layout_marginLeft="107dp"
-        android:text="@string/age"
-        android:textColor="@color/black"
-        app:layout_constraintBaseline_toBaselineOf="@+id/height"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/height"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
-        android:layout_marginBottom="13dp"
-        android:text="@string/height1"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/data"
-        app:layout_constraintStart_toEndOf="@+id/age" />
-
-    <TextView
-        android:id="@+id/weight"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="21dp"
-        android:layout_marginLeft="21dp"
-        android:layout_marginBottom="13dp"
-        android:text="@string/weight1"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/data"
-        app:layout_constraintStart_toEndOf="@+id/height" />
-
-    <TextView
-        android:id="@+id/imc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginLeft="24dp"
-        android:layout_marginBottom="13dp"
-        android:text="@string/imc"
-        android:textColor="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/data"
-        app:layout_constraintStart_toEndOf="@+id/weight" />
-
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="@+id/data" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

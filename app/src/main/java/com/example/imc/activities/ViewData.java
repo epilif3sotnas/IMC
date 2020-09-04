@@ -1,4 +1,4 @@
-package com.example.imc;
+package com.example.imc.activities;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
@@ -15,6 +15,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.imc.customAdapter.CustomAdapterData;
+import com.example.imc.R;
+import com.example.imc.classes.objData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,7 +46,6 @@ public class ViewData extends AppCompatActivity {
         setContentView(R.layout.activity_view_data);
 
         loading = findViewById(R.id.loading);
-        loading.setVisibility(View.VISIBLE);
         date = findViewById(R.id.date);
         age = findViewById(R.id.age);
         weight = findViewById(R.id.weight);
@@ -84,7 +86,6 @@ public class ViewData extends AppCompatActivity {
                 Collections.reverse(data);
                 if ((!data.isEmpty())){
                     CustomAdapterData customAdapter = new CustomAdapterData(data, getApplicationContext());
-                    loading.setVisibility(View.GONE);
                     date.setVisibility(View.VISIBLE);
                     age.setVisibility(View.VISIBLE);
                     weight.setVisibility(View.VISIBLE);

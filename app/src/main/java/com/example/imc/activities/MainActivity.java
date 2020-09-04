@@ -1,4 +1,4 @@
-package com.example.imc;
+package com.example.imc.activities;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -21,6 +21,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.imc.classes.IMC;
+import com.example.imc.R;
 import com.example.imc.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -59,8 +61,7 @@ public class MainActivity extends AppCompatActivity {
         btSubmit = findViewById(R.id.btSubmit);
         btViewAll = findViewById(R.id.btViewAll);
 
-        boolean network = isConnectedNetwork();
-        if (!network){
+        if (!isConnectedNetwork()){
             Toast.makeText(MainActivity.this, "No internet connection", Toast.LENGTH_LONG).show();
         }
         buttons();

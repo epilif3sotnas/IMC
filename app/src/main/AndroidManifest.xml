@@ -15,24 +15,24 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
-            android:name=".tableIMC"
-            android:parentActivityName=".MainActivity">
+            android:name=".activities.tableIMC"
+            android:parentActivityName=".activities.MainActivity">
         </activity>
         <activity
             android:name=".ui.login.Register"
             android:parentActivityName=".ui.login.LoginActivity">
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:parentActivityName=".ui.login.LoginActivity">
         </activity>
         <activity
-            android:name=".About"
-            android:parentActivityName=".MainActivity">
+            android:name=".activities.About"
+            android:parentActivityName=".activities.MainActivity">
         </activity>
         <activity
-            android:name=".ViewData"
-            android:parentActivityName=".MainActivity">
+            android:name=".activities.ViewData"
+            android:parentActivityName=".activities.MainActivity">
         </activity>
         <activity
             android:name=".ui.login.LoginActivity"
