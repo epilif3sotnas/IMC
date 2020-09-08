@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.example.imc.customAdapter.CustomAdapterData;
 import com.example.imc.R;
-import com.example.imc.classes.objData;
+import com.example.imc.objects.objData;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;

@@ -21,7 +21,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import com.example.imc.classes.IMC;
+import com.example.imc.objects.IMC;
 import com.example.imc.R;
 import com.example.imc.ui.login.LoginActivity;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -81,8 +81,13 @@ public class MainActivity extends AppCompatActivity {
             case R.id.logout:
                 FirebaseAuth.getInstance().signOut();
                 startActivity(new Intent(this, LoginActivity.class));
+                break;
             case R.id.tableIMC:
                 startActivity(new Intent(this, tableIMC.class));
+                break;
+            case R.id.settings:
+                startActivity(new Intent(this, SettingsActivity.class));
+                break;
             default:
                 break;
         }

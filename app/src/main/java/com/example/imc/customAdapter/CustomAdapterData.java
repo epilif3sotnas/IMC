@@ -17,7 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
 import com.example.imc.R;
-import com.example.imc.classes.objData;
+import com.example.imc.objects.objData;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;

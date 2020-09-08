@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.DataUser">
+
+    <include
+        android:id="@+id/topBar"
+        layout="@layout/main_top_bar"
+        android:background="@color/darkGray"
+        app:popupTheme="@style/TopBarPopup"></include>
+
+    <Button
+        android:id="@+id/btSubmit"
+        android:layout_width="92dp"
+        android:layout_height="47dp"
+        android:layout_marginBottom="112dp"
+        android:text="@string/submit"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.47"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editHeight"
+        app:layout_constraintVertical_bias="0.503" />
+
+    <EditText
+        android:id="@+id/editAge"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="20dp"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:textColor="#000"
+        android:textColorHint="#000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/age" />
+
+    <TextView
+        android:id="@+id/dataUser"
+        android:layout_width="72dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/dataUser"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBar" />
+
+    <TextView
+        android:id="@+id/age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="64dp"
+        android:text="@string/age"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.463"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dataUser" />
+
+    <TextView
+        android:id="@+id/height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        android:text="@string/height"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.456"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editAge" />
+
+    <EditText
+        android:id="@+id/editHeight"
+        android:layout_width="100dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="40dp"
+        android:ems="10"
+        android:importantForAutofill="no"
+        android:inputType="number"
+        android:textColor="#000"
+        android:textColorHint="#000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.453"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/height" />
+
+    <TextView
+        android:id="@+id/current"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="112dp"
+        android:text="@string/current"
+        android:textColor="#000"
+        android:textColorHint="#000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.767"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBar" />
+
+    <TextView
+        android:id="@+id/currentAge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="@string/none"
+        android:textColor="#000"
+        android:textColorHint="#000"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.342"
+        app:layout_constraintStart_toEndOf="@+id/editAge"
+        app:layout_constraintTop_toBottomOf="@+id/current" />
+
+    <TextView
+        android:id="@+id/currentHeight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="50dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="93dp"
+        android:layout_marginBottom="292dp"
+        android:text="@string/none"
+        android:textColor="#000"
+        android:textColorHint="#000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/editHeight"
+        app:layout_constraintTop_toBottomOf="@+id/currentAge" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

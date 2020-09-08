@@ -8,7 +8,7 @@
     <string name="submit">Submit</string>
     <string name="weight">Weight (Kg)</string>
     <string name="date">Date (year-month-day):</string>
-    <string name="version">Version BETA 0.01</string>
+    <string name="version">BETA 0.01</string>
     <string name="developer">This app was developed by Filipe Santos</string>
     <string name="date1">Date</string>
     <string name="height1">Height</string>
@@ -27,4 +27,16 @@
     <string name="logout">Logout</string>
     <string name="signUp">Sign Up</string>
     <string name="tableIMC">Table IMC</string>
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="dataUser">User data</string>
+    <string name="none">Null</string>
+    <string name="current">Current</string>
+
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+    <string name="emailClient">Choose an email client:</string>
+
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
 </resources>

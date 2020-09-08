@@ -1,4 +1,4 @@
-package com.example.imc.classes;
+package com.example.imc.objects;
 
 import java.text.DecimalFormat;
 
