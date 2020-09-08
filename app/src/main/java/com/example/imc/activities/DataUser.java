@@ -37,6 +37,7 @@ public class DataUser extends AppCompatActivity {
     private TextView currentAge, currentHeight;
     FirebaseUser userCurrent = FirebaseAuth.getInstance().getCurrentUser();
     private CollectionReference db = FirebaseFirestore.getInstance().collection(Objects.requireNonNull(userCurrent).getUid() + "Data");
+    private static final String TAG = DataUser.class.getName();
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -80,13 +81,13 @@ public class DataUser extends AppCompatActivity {
                 db.document("dataUser").set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d("MainActivity", "DocumentSnapshot added with ID: " + db.getId());
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + db.getId());
                         Toast.makeText(DataUser.this, "Data inserted", Toast.LENGTH_LONG).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w("MainActivity", "Error adding document", e);
+                        Log.w(TAG, "Error adding document", e);
                         Toast.makeText(DataUser.this, "Data not inserted", Toast.LENGTH_LONG).show();
                     }
                 });

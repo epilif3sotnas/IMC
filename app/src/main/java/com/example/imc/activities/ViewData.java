@@ -38,6 +38,7 @@ public class ViewData extends AppCompatActivity {
     private TextView date, age, weight, height, imc;
     FirebaseUser userCurrent = FirebaseAuth.getInstance().getCurrentUser();
     private  CollectionReference db = FirebaseFirestore.getInstance().collection(Objects.requireNonNull(userCurrent).getUid());
+    private static final String TAG = ViewData.class.getName();
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -65,8 +66,7 @@ public class ViewData extends AppCompatActivity {
         listView = findViewById(R.id.data);
         listView.setVisibility(View.GONE);
 
-        boolean network = isConnectedNetwork();
-        if (!network){
+        if (!isConnectedNetwork()){
             Toast.makeText(ViewData.this, "No internet connection", Toast.LENGTH_LONG).show();
         }
         loadData();

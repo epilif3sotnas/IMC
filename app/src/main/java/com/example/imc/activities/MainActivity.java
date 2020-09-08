@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText editAge, editWeight, editHeight;
     FirebaseUser userCurrent = FirebaseAuth.getInstance().getCurrentUser();
     private CollectionReference db = FirebaseFirestore.getInstance().collection(Objects.requireNonNull(userCurrent).getUid());
+    private static final String TAG = MainActivity.class.getName();
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -94,6 +95,12 @@ public class MainActivity extends AppCompatActivity {
         btSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (!isConnectedNetwork()){
+                    Toast.makeText(MainActivity.this, "No internet Connection", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "No internet Connection");
+                    return;
+                }
+                Log.d(TAG, "Internet Connection");
                 DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 String currentDate = format.format(Calendar.getInstance().getTime());
 
@@ -125,13 +132,13 @@ public class MainActivity extends AppCompatActivity {
                 db.document(currentDate).set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
-                        Log.d("MainActivity", "DocumentSnapshot added with ID: " + db.getId());
+                        Log.d(TAG, "DocumentSnapshot added with ID: " + db.getId());
                         Toast.makeText(MainActivity.this, "Data inserted", Toast.LENGTH_LONG).show();
                     }
                 }).addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception e) {
-                        Log.w("MainActivity", "Error adding document", e);
+                        Log.w(TAG, "Error adding document", e);
                         Toast.makeText(MainActivity.this, "Data not inserted", Toast.LENGTH_LONG).show();
                     }
                 });
