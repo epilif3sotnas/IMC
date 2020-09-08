@@ -30,9 +30,6 @@
             android:name=".activities.MainActivity"
             android:parentActivityName=".ui.login.LoginActivity" />
         <activity
-            android:name=".activities.About"
-            android:parentActivityName=".activities.MainActivity" />
-        <activity
             android:name=".activities.ViewData"
             android:parentActivityName=".activities.MainActivity" />
         <activity
