@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 editWeight.getText().clear();
-                message(ageInt, height_m, imc);
+                message(ageInt, height_m, imc, weight);
             }
         });
         btViewAll.setOnClickListener(new View.OnClickListener() {
@@ -162,9 +162,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void message(int age, double height, String imc){
+    public void message(int age, double height, String imc, double weight){
         String buffer = IMC.refIMC(imc, age, height);
-        showMessage("IMC", buffer);
+        showMessage("IMC", "Your weight: " + weight + "kg\n" + buffer);
     }
     public void showMessage(String title, String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
