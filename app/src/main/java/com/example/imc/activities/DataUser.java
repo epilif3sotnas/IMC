@@ -110,6 +110,5 @@ public class DataUser extends AppCompatActivity {
                 }
             }
         });
-
     }
 }

@@ -24,12 +24,16 @@ import androidx.appcompat.widget.Toolbar;
 import com.example.imc.objects.IMC;
 import com.example.imc.R;
 import com.example.imc.ui.login.LoginActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -41,10 +45,12 @@ import java.util.Objects;
 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
 public class MainActivity extends AppCompatActivity {
     private Button btSubmit, btViewAll;
-    private EditText editAge, editWeight, editHeight;
+    private EditText editWeight;
     FirebaseUser userCurrent = FirebaseAuth.getInstance().getCurrentUser();
     private CollectionReference db = FirebaseFirestore.getInstance().collection(Objects.requireNonNull(userCurrent).getUid());
+    private CollectionReference db2 = FirebaseFirestore.getInstance().collection(Objects.requireNonNull(userCurrent).getUid() + "Data");
     private static final String TAG = MainActivity.class.getName();
+    private String age, height_cm;
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -56,9 +62,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar topbar = findViewById(R.id.topBar);
         setSupportActionBar(topbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("IMC Calculator");
-        editAge = findViewById(R.id.editAge);
         editWeight = findViewById(R.id.editWeight);
-        editHeight = findViewById(R.id.editHeight);
         btSubmit = findViewById(R.id.btSubmit);
         btViewAll = findViewById(R.id.btViewAll);
 
@@ -66,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "No internet connection", Toast.LENGTH_LONG).show();
         }
         buttons();
+        loadData();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -96,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!isConnectedNetwork()){
-                    Toast.makeText(MainActivity.this, "No internet Connection", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "No internet Connection", Toast.LENGTH_LONG).show();
                     Log.d(TAG, "No internet Connection");
                     return;
                 }
@@ -104,15 +109,19 @@ public class MainActivity extends AppCompatActivity {
                 DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
                 String currentDate = format.format(Calendar.getInstance().getTime());
 
-                if(editAge.length() == 0 || editHeight.length() == 0 || editWeight.length() == 0){
-                    Toast.makeText(MainActivity.this, "Parameters empty", Toast.LENGTH_LONG).show();
+                if(editWeight.length() == 0){
+                    Toast.makeText(MainActivity.this, "Parameter empty", Toast.LENGTH_LONG).show();
+                    return;
+                }
+                if (age == null || height_cm == null){
+                    Toast.makeText(MainActivity.this, "No age or height entered in settings", Toast.LENGTH_LONG).show();
                     return;
                 }
                 double weight = Double.parseDouble(editWeight.getText().toString());
-                double height_m = 0.01 * Integer.parseInt(editHeight.getText().toString());
-                int age = Integer.parseInt(editAge.getText().toString());
+                double height_m = 0.01 * Double.parseDouble(height_cm);
+                int ageInt = Integer.parseInt(age);
 
-                if(age == 0 || height_m == 0 || weight == 0){
+                if(weight == 0){
                     Toast.makeText(MainActivity.this, "Parameters with 0", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -123,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Map<String, Object> user = new HashMap<>();
                 user.put("Name", userCurrent.getEmail());
-                user.put("Age", age);
+                user.put("Age", ageInt);
                 user.put("Weight", weight);
                 user.put("Height", height_m);
                 user.put("Date", currentDate);
@@ -143,7 +152,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
                 editWeight.getText().clear();
-                message(age, height_m, imc);
+                message(ageInt, height_m, imc);
             }
         });
         btViewAll.setOnClickListener(new View.OnClickListener() {
@@ -174,5 +183,19 @@ public class MainActivity extends AppCompatActivity {
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         assert connectivityManager != null;
         return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
+    }
+    public void loadData(){
+        db2.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot document : Objects.requireNonNull(task.getResult())) {
+                        age = Objects.requireNonNull(document.get("Age")).toString();
+                        height_cm = Objects.requireNonNull(document.get("Height")).toString();
+                    }
+                }
+            }
+        });
     }
 }
