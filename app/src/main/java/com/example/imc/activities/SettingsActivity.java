@@ -112,9 +112,9 @@ public class SettingsActivity extends AppCompatActivity {
         builder.setCancelable(true);
         builder.setTitle(title);
         builder.setMessage(message);
-        final EditText act = new EditText(context);
-        act.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
-        builder.setView(act);
+        final EditText password = new EditText(context);
+        password.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+        builder.setView(password);
         builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -126,12 +126,12 @@ public class SettingsActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 final FirebaseUser userCurrent = FirebaseAuth.getInstance().getCurrentUser();
-                if(act.length() == 0){
+                if(password.length() == 0){
                     Toast.makeText(context, "Nothing entered", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                AuthCredential credential = EmailAuthProvider.getCredential(Objects.requireNonNull(Objects.requireNonNull(userCurrent).getEmail()), act.getText().toString());
+                AuthCredential credential = EmailAuthProvider.getCredential(Objects.requireNonNull(Objects.requireNonNull(userCurrent).getEmail()), password.getText().toString());
                 userCurrent.reauthenticate(credential)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
