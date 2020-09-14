@@ -11,12 +11,8 @@ import android.os.Bundle;
 
 import com.example.imc.R;
 import com.example.imc.objects.objData;
-import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
-import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
@@ -30,15 +26,9 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Objects;
-import java.util.Random;
 
 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
 public class ViewDataGraph extends AppCompatActivity {
@@ -103,6 +93,8 @@ public class ViewDataGraph extends AppCompatActivity {
         dataSets.add(lineDataSet);
         LineData data = new LineData(dataSets);
         graph.setData(data);
+        graph.getDescription().setText("Your Weight");
+        graph.getDescription().setTextSize(14);
         graph.invalidate();
     }
 }
