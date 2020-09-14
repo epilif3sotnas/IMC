@@ -6,12 +6,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,11 +37,9 @@ import java.util.Objects;
 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
 public class ViewData extends AppCompatActivity {
     private ListView listView;
-    private ProgressBar loading;
     private TextView date, age, weight, height, imc;
     FirebaseUser userCurrent = FirebaseAuth.getInstance().getCurrentUser();
     private  CollectionReference db = FirebaseFirestore.getInstance().collection(Objects.requireNonNull(userCurrent).getUid());
-    private static final String TAG = ViewData.class.getName();
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -46,7 +47,6 @@ public class ViewData extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_data);
 
-        loading = findViewById(R.id.loading);
         date = findViewById(R.id.date);
         age = findViewById(R.id.age);
         weight = findViewById(R.id.weight);
@@ -70,6 +70,23 @@ public class ViewData extends AppCompatActivity {
             Toast.makeText(ViewData.this, "No internet connection", Toast.LENGTH_LONG).show();
         }
         loadData();
+    }
+    @Override
+    public boolean onCreateOptionsMenu(Menu graph) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.view_graph, graph);
+        return super.onCreateOptionsMenu(graph);
+    }
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.viewGraph:
+                startActivity(new Intent(this, ViewDataGraph.class));
+                break;
+            default:
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
     public void loadData(){
         db.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {

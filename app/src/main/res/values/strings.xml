@@ -32,5 +32,6 @@
     <string name="none">Null</string>
     <string name="current">Current</string>
     <string name="emailClient">Choose an email client:</string>
+    <string name="graph">Graph</string>
 
 </resources>
