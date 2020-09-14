@@ -93,9 +93,11 @@ public class SettingsActivity extends AppCompatActivity {
     public static void sendFeedback(Context context){
         String body = "";
         try{
-            body = context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
-            body = "\n\n-----------------------------\nPlease don't remove this information\n Device OS: Android \n Device OS version: " +
-                    Build.VERSION.RELEASE + "\n App Version: " + body + "\n Device Brand: " + Build.BRAND +
+            body =  "\n\n-----------------------------\n" + "Please don't remove this information\n" + "Version: " +
+                     "\nDevice OS: Android \n Device OS version: " +
+                    Build.VERSION.RELEASE + "\n App Version: " +
+                    context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName +
+                    "\n Device Brand: " + Build.BRAND +
                     "\n Device Model: " + Build.MODEL + "\n Device Manufacturer: " + Build.MANUFACTURER;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
