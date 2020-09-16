@@ -12,10 +12,14 @@ import android.os.Bundle;
 import com.example.imc.R;
 import com.example.imc.objects.objData;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -77,8 +81,10 @@ public class ViewDataGraph extends AppCompatActivity {
     }
     public void createGraph(){
         ArrayList<Entry> entries = new ArrayList<>();
+        final ArrayList<String> dates = new ArrayList<>();
         int size = data.size();
         for (int j = 0; j < size; j++){
+            dates.add(data.get(j).getDate());
             Entry entry = new Entry(j, Float.parseFloat(data.get(j).getWeight()));
             entries.add(entry);
         }
@@ -88,6 +94,13 @@ public class ViewDataGraph extends AppCompatActivity {
         lineDataSet.setLineWidth(6);
         lineDataSet.setCircleColor(Color.parseColor("#FF0000"));
         lineDataSet.setAxisDependency(YAxis.AxisDependency.LEFT);
+
+        XAxis xAxis = graph.getXAxis();
+        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        xAxis.setTextSize(10f);
+        xAxis.setValueFormatter(new IndexAxisValueFormatter(dates));
+        xAxis.setXOffset(50f);
+        xAxis.setLabelRotationAngle(-25f);
 
         List<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(lineDataSet);
