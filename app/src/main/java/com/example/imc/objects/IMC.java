@@ -12,6 +12,7 @@ public class IMC {
             return imc;
         }
         public static String refIMC(String imc, int age, double height){
+            DecimalFormat form = new DecimalFormat("###.0");
             double imc_d = Double.parseDouble(imc);
             StringBuilder buffer = new StringBuilder();
             if(age < 15)
@@ -32,8 +33,7 @@ public class IMC {
                 else if(imc_d >= 39){
                     buffer.append("Your IMC is ").append(imc_d).append(", you are in serious obesity.\n");
                 }
-                buffer.append("Your normal weight is between ").append(height * height * 19).append("kg and ").append(height * height * 24).append("kg.\n");
-
+                buffer.append("Your normal weight is between ").append(form.format(height * height * 19)).append("kg and ").append(form.format(height * height * 24)).append("kg.\n");
             }
             if(age >= 25 && age <= 34){
                 if(imc_d < 20){
@@ -50,7 +50,7 @@ public class IMC {
                 else if(imc_d >= 40){
                     buffer.append("Your IMC is ").append(imc_d).append(", you are in serious obesity.\n");
                 }
-                buffer.append("Your normal weight is between ").append(height * height * 20).append("kg and ").append(height * height * 25).append("kg.\n");
+                buffer.append("Your normal weight is between ").append(form.format(height * height * 20)).append("kg and ").append(form.format(height * height * 25)).append("kg.\n");
             }
             if(age >= 35 && age <= 44) {
                 if (imc_d < 21) {
@@ -64,7 +64,7 @@ public class IMC {
                 } else if (imc_d >= 41) {
                     buffer.append("Your IMC is ").append(imc_d).append(", you are in serious obesity.\n");
                 }
-                buffer.append("Your normal weight is between ").append(height * height * 21).append("kg and ").append(height * height * 26).append("kg.\n");
+                buffer.append("Your normal weight is between ").append(form.format(height * height * 21)).append("kg and ").append(form.format(height * height * 26)).append("kg.\n");
             }
             if(age >= 45 && age <= 54){
                 if(imc_d < 22){
@@ -82,7 +82,7 @@ public class IMC {
                 else if(imc_d >= 42){
                     buffer.append("Your IMC is ").append(imc_d).append(", you are in serious obesity.\n");
                 }
-                buffer.append("Your normal weight is between ").append(height * height * 22).append("kg and ").append(height * height * 27).append("kg.\n");
+                buffer.append("Your normal weight is between ").append(form.format(height * height * 22)).append("kg and ").append(form.format(height * height * 27)).append("kg.\n");
             }
             if(age >= 55 && age <= 64){
                 if(imc_d < 23){
@@ -100,7 +100,7 @@ public class IMC {
                 else if(imc_d >= 43){
                     buffer.append("Your IMC is ").append(imc_d).append(", you are in serious obesity.\n");
                 }
-                buffer.append("Your normal weight is between ").append(height * height * 23).append("kg and ").append(height * height * 28).append("kg.\n");
+                buffer.append("Your normal weight is between ").append(form.format(height * height * 23)).append("kg and ").append(form.format(height * height * 28)).append("kg.\n");
             }
             if(age >= 65){
                 if(imc_d < 24){
@@ -118,7 +118,7 @@ public class IMC {
                 else if(imc_d >= 44){
                     buffer.append("Your IMC is ").append(imc_d).append(", you are in serious obesity.\n");
                 }
-                buffer.append("Your normal weight is between ").append(height * height * 24).append("kg and ").append(height * height * 29).append("kg.\n");
+                buffer.append("Your normal weight is between ").append(form.format(height * height * 24)).append("kg and ").append(form.format(height * height * 29)).append("kg.\n");
             }
             return buffer.toString();
         }
