@@ -5,7 +5,11 @@ import java.text.DecimalFormat;
 public class IMC {
         public static String calcIMC(double weight, double height) {
             DecimalFormat df2 = new DecimalFormat("##.00");
-            return df2.format(weight / (height * height));
+            String imc = df2.format(weight / (height * height));
+            if (imc.contains(",")){
+                return imc.substring(0, imc.indexOf(",")) + "." + imc.substring(imc.indexOf(",") + 1);
+            }
+            return imc;
         }
         public static String refIMC(String imc, int age, double height){
             double imc_d = Double.parseDouble(imc);
