@@ -8,14 +8,14 @@
         app:showAsAction="never">
     </item>
     <item
-        android:id="@+id/logout"
-        android:title="@string/logout"
+        android:id="@+id/settings"
+        android:title="@string/title_activity_settings"
         android:background="@color/white"
         app:showAsAction="never">
     </item>
     <item
-        android:id="@+id/settings"
-        android:title="@string/title_activity_settings"
+        android:id="@+id/logout"
+        android:title="@string/logout"
         android:background="@color/white"
         app:showAsAction="never">
     </item>

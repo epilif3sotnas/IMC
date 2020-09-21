@@ -14,11 +14,15 @@ import android.provider.ContactsContract;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
+import android.util.AttributeSet;
 import android.util.Log;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
@@ -50,10 +54,16 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings_activity);
 
+        Toolbar topbar = findViewById(R.id.topBar);
+        setSupportActionBar(topbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle("IMC Calculator");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         getSupportFragmentManager()
                 .beginTransaction()
                 .replace(R.id.settings, new SettingsFragment())
                 .commit();
+
     }
     public static class SettingsFragment extends PreferenceFragmentCompat {
         @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -64,7 +74,6 @@ public class SettingsActivity extends AppCompatActivity {
             Preference preFeedback = findPreference("email");
             Preference dataUser = findPreference("dataUser");
             Preference delete = findPreference("delete");
-
 
             Objects.requireNonNull(preFeedback).setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
