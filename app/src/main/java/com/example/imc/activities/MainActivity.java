@@ -106,6 +106,11 @@ public class MainActivity extends AppCompatActivity {
                     Log.d(TAG, "No internet Connection");
                     return;
                 }
+                if (userCurrent == null){
+                    Toast.makeText(MainActivity.this, "No user logged", Toast.LENGTH_LONG).show();
+                    Log.d(TAG, "No user logged");
+                    return;
+                }
                 Log.d(TAG, "Internet Connection");
                 DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                 String currentDate = format.format(Calendar.getInstance().getTime());
@@ -128,10 +133,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 String imc = IMC.calcIMC(weight, height_m);
-                System.out.println(imc);
-                if (userCurrent == null){
-                    return;
-                }
+
                 Map<String, Object> user = new HashMap<>();
                 user.put("Name", userCurrent.getEmail());
                 user.put("Age", ageInt);
