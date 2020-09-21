@@ -9,7 +9,9 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -24,6 +26,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.imc.R;
+import com.example.imc.activities.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -56,6 +59,10 @@ public class Register extends AppCompatActivity {
         setSupportActionBar(topbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle("IMC Calculator");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        if (!isConnectedNetwork()){
+            Toast.makeText(Register.this, "No internet connection", Toast.LENGTH_LONG).show();
+        }
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -124,6 +131,10 @@ public class Register extends AppCompatActivity {
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (!isConnectedNetwork()){
+                            Toast.makeText(Register.this, "No internet connection", Toast.LENGTH_LONG).show();
+                            return;
+                        }
                         if (task.isSuccessful()) {
                             Toast.makeText(getApplicationContext(), "Account created", Toast.LENGTH_LONG).show();
                         } else {
@@ -131,5 +142,10 @@ public class Register extends AppCompatActivity {
                         }
                     }
                 });
+    }
+    public boolean isConnectedNetwork(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert connectivityManager != null;
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 }

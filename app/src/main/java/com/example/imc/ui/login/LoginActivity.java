@@ -6,7 +6,9 @@ import androidx.annotation.NonNull;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -53,6 +55,10 @@ public class LoginActivity extends AppCompatActivity {
         btRegister = findViewById(R.id.register);
         loadingProgressBar = findViewById(R.id.loading);
         mAuth = FirebaseAuth.getInstance();
+
+        if (!isConnectedNetwork()){
+            Toast.makeText(LoginActivity.this, "No internet connection", Toast.LENGTH_LONG).show();
+        }
 
         loginViewModel.getLoginFormState().observe(this, new Observer<LoginFormState>() {
             @Override
@@ -162,5 +168,10 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(new Intent(getApplicationContext(), Register.class));
             }
         });
+    }
+    public boolean isConnectedNetwork(){
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        assert connectivityManager != null;
+        return connectivityManager.getActiveNetworkInfo() != null && connectivityManager.getActiveNetworkInfo().isConnected();
     }
 }

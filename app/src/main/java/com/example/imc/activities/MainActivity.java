@@ -39,6 +39,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 
@@ -106,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
                 Log.d(TAG, "Internet Connection");
-                DateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+                DateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.ENGLISH);
                 String currentDate = format.format(Calendar.getInstance().getTime());
 
                 if(editWeight.length() == 0){
@@ -127,6 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 String imc = IMC.calcIMC(weight, height_m);
+                System.out.println(imc);
                 if (userCurrent == null){
                     return;
                 }
