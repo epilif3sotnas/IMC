@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -38,7 +40,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -50,6 +51,8 @@ public class ViewDataGraph extends AppCompatActivity implements AdapterView.OnIt
     private CollectionReference db = FirebaseFirestore.getInstance().collection(Objects.requireNonNull(userCurrent).getUid());
     private ArrayList<objData> data;
     private Spinner options;
+    private Button btdataByYear;
+    private EditText year;
 
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -64,10 +67,13 @@ public class ViewDataGraph extends AppCompatActivity implements AdapterView.OnIt
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         graph = findViewById(R.id.graph);
+        btdataByYear = findViewById(R.id.btYear);
+        year = findViewById(R.id.year);
         options = findViewById(R.id.options);
         options.setOnItemSelectedListener(this);
 
         loadDataSpinner();
+        Buttons();
     }
     public void loadDataSpinner(){
         String[] opts = {"This Month", "Last Month", "Last three Months", "Last six Months", "Last year"};
@@ -190,10 +196,22 @@ public class ViewDataGraph extends AppCompatActivity implements AdapterView.OnIt
                                     }
                                 }
                                 break;
+                            case 6:
+                                if(calendar2.get(Calendar.YEAR) == calendar1.get(Calendar.YEAR)){
+                                    objData obj = new objData(Objects.requireNonNull(document.get("Date")).toString(),
+                                            Objects.requireNonNull(document.get("Age")).toString(),
+                                            Objects.requireNonNull(document.get("Height")).toString(),
+                                            Objects.requireNonNull(document.get("Weight")).toString(),
+                                            Objects.requireNonNull(document.get("IMC")).toString());
+                                    data.add(obj);
+                                }
+                                break;
                         }
                     }
                 }
-                System.out.println(data.size());
+                if(data.size() == 0){
+                    Toast.makeText(ViewDataGraph.this, "No data available", Toast.LENGTH_LONG).show();
+                }
                 if (!data.isEmpty()){
                     createGraph();
                 }
@@ -250,5 +268,22 @@ public class ViewDataGraph extends AppCompatActivity implements AdapterView.OnIt
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
         Toast.makeText(getApplicationContext(), "Select an option", Toast.LENGTH_LONG).show();
+    }
+    public void Buttons(){
+        btdataByYear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(btdataByYear.getText().toString().equals("Show by year")){
+                    options.setVisibility(View.GONE);
+                    year.setVisibility(View.VISIBLE);
+                    btdataByYear.setText("Submit");
+                }else{
+                    loadDataGraph(year.getText().toString() + "-01-01", 6);
+                    options.setVisibility(View.VISIBLE);
+                    year.setVisibility(View.GONE);
+                    btdataByYear.setText("Show by year");
+                }
+            }
+        });
     }
 }

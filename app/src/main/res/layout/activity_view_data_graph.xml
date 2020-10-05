@@ -38,4 +38,27 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/topBar" />
 
+    <Button
+        android:id="@+id/btYear"
+        android:layout_width="135dp"
+        android:layout_height="38dp"
+        android:text="@string/showByYear"
+        app:layout_constraintBottom_toTopOf="@+id/graph"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/options"
+        app:layout_constraintTop_toBottomOf="@+id/topBar" />
+
+    <EditText
+        android:id="@+id/year"
+        android:layout_width="91dp"
+        android:layout_height="42dp"
+        android:ems="10"
+        android:inputType="number"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/graph"
+        app:layout_constraintEnd_toStartOf="@+id/btYear"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBar"
+        android:importantForAutofill="no" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

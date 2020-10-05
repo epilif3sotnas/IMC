@@ -33,5 +33,6 @@
     <string name="current">Current</string>
     <string name="emailClient">Choose an email client:</string>
     <string name="graph">Graph</string>
+    <string name="showByYear">Show by year</string>
 
 </resources>
