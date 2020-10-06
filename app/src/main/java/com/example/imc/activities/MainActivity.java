@@ -39,6 +39,7 @@ import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -71,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         }
         buttons();
         loadData();
+        checkMessageUpdate();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -200,5 +202,14 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+    public void checkMessageUpdate(){
+        Date date = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        if (calendar.get(Calendar.DAY_OF_MONTH) <= 4){
+            showMessage("Update Last Month", "The analysis of your last month was updated\n" +
+                    "To see you need to click in button View Data -> Data Last Month");
+        }
     }
 }
