@@ -39,7 +39,6 @@ public class DataUser extends AppCompatActivity {
     private CollectionReference db = FirebaseFirestore.getInstance().collection(Objects.requireNonNull(userCurrent).getUid() + "Data");
     private static final String TAG = DataUser.class.getName();
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

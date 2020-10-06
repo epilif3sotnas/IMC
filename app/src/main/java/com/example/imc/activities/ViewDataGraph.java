@@ -54,8 +54,6 @@ public class ViewDataGraph extends AppCompatActivity implements AdapterView.OnIt
     private Button btdataByYear;
     private EditText year;
 
-
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,7 +82,6 @@ public class ViewDataGraph extends AppCompatActivity implements AdapterView.OnIt
     }
     public void loadDataGraph(final String date, final int op){
         db.get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @RequiresApi(api = Build.VERSION_CODES.KITKAT)
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                 Calendar calendar1 = Calendar.getInstance();

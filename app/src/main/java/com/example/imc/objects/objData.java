@@ -14,6 +14,11 @@ public class objData {
         this.weight = weight;
         this.imc = imc;
     }
+    public objData(String date, String weight, String imc){
+        this.date = date;
+        this.weight = weight;
+        this.imc = imc;
+    }
     public String getDate() {
         return date;
     }

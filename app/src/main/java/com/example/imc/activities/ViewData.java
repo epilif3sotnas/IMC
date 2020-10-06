@@ -41,7 +41,6 @@ public class ViewData extends AppCompatActivity {
     FirebaseUser userCurrent = FirebaseAuth.getInstance().getCurrentUser();
     private  CollectionReference db = FirebaseFirestore.getInstance().collection(Objects.requireNonNull(userCurrent).getUid());
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -83,6 +82,8 @@ public class ViewData extends AppCompatActivity {
             case R.id.viewGraph:
                 startActivity(new Intent(this, ViewDataGraph.class));
                 break;
+            case R.id.dataLastMonth:
+                startActivity(new Intent(this, ViewDataLastMonth.class));
             default:
                 break;
         }

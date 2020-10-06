@@ -13,13 +13,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".activities.ViewDataGraph"
-            android:parentActivityName=".activities.ViewData">
-        </activity>
+        <activity android:name=".activities.ViewDataLastMonth"
+            android:parentActivityName=".activities.ViewData"></activity>
+        <activity
+            android:name=".activities.ViewDataGraph"
+            android:parentActivityName=".activities.ViewData"></activity>
         <activity
             android:name=".activities.DataUser"
-            android:parentActivityName=".activities.SettingsActivity">
-        </activity>
+            android:parentActivityName=".activities.SettingsActivity"></activity>
         <activity
             android:name=".activities.SettingsActivity"
             android:label="@string/title_activity_settings"

@@ -7,4 +7,10 @@
         android:background="@color/white"
         app:showAsAction="never">
     </item>
+    <item
+        android:id="@+id/dataLastMonth"
+        android:title="@string/dataLastMonth"
+        android:background="@color/white"
+        app:showAsAction="never">
+    </item>
 </menu>

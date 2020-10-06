@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.ViewDataLastMonth">
+
+    <include
+        android:id="@+id/topBar"
+        layout="@layout/main_top_bar"
+        android:background="@color/darkGray"
+        app:popupTheme="@style/TopBarPopup"></include>
+
+    <TextView
+        android:id="@+id/weightLOST"
+        android:layout_width="319dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="44dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
+    <TextView
+        android:id="@+id/weightMIN"
+        android:layout_width="319dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="32dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weightLOST" />
+
+    <TextView
+        android:id="@+id/weightMAX"
+        android:layout_width="319dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="36dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weightMIN" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="147dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="28dp"
+        android:gravity="center_horizontal"
+        android:text="@string/dataLastMonth"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topBar" />
+
+    <TextView
+        android:id="@+id/weightFluctuation"
+        android:layout_width="319dp"
+        android:layout_height="32dp"
+        android:layout_marginTop="36dp"
+        android:textColor="@color/black"
+        android:textColorHint="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/weightMAX"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
