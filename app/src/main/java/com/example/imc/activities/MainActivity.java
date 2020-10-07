@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         buttons();
         loadData();
         checkMessageUpdate();
+        isVerifiedEmail();
     }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -211,5 +212,38 @@ public class MainActivity extends AppCompatActivity {
             showMessage("Update Last Month", "The analysis of your last month was updated\n" +
                     "To see you need to click in button View Data -> Data Last Month");
         }
+    }
+    public void isVerifiedEmail(){
+        if (!userCurrent.isEmailVerified()){
+            messageYESandNO("Email Verification", "You don't have your email verified\n" +
+                    "To send email verification click YES");
+        }
+    }
+    public void messageYESandNO(String title, String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setCancelable(true)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        userCurrent.sendEmailVerification()
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()){
+                                            Log.d(TAG, "Email sent.");
+                                        }
+                                    }
+                                });
+                    }
+                });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.show();
     }
 }
