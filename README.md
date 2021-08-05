@@ -9,12 +9,12 @@ The user first neeed to insert height and also its age, then he can insert weigh
 
 # Requirements
 
-- Android 4.1 or higher
+- Android 4.1 (API 16) or higher
 
 
 # Technologies used
 
-- Android
-- Java
-- Firebase (Google Cloud)
-- SQLite
+- [Android](https://developer.android.com/docs)
+- [Java](https://docs.oracle.com/javase/8/)
+- [Firebase (Google Cloud)](https://firebase.google.com/docs/reference)
+- [SQLite](https://sqlite.org/docs.html)
